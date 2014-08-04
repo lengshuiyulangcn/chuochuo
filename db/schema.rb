@@ -11,7 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140804041221) do
+ActiveRecord::Schema.define(version: 20140804052331) do
+
+  create_table "passages", force: true do |t|
+    t.string   "content"
+    t.integer  "user_id"
+    t.integer  "viewed",     default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
+  create_table "sentences", force: true do |t|
+    t.integer  "passage_id"
+    t.integer  "sentence_no"
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "translations", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "sentence_id"
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

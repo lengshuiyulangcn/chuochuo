@@ -1,0 +1,62 @@
+<center>
+<span style="font-size: 16px;"> <%=@passage.title%></span>
+</center>
+<div class="box">
+	<p>原文:</p>
+<span style="color: blue;"><%=@passage.content%></span>
+</div>
+<%@sentences.each do |sentence|%>
+<div class="box">
+翻译:
+
+<p class="source_sentence"><%=sentence.content%></p>
+<%unless sentence.get_translators.include? current_user.id%>
+<div id="div_on_<%=sentence.id%>">
+<p><input class="btn btn-info" type="button" value="我来翻译"
+   onClick="document.getElementById('div_off_<%=sentence.id%>').style.display='block';
+            document.getElementById('div_on_<%=sentence.id%>').style.display='none'">
+    </p>
+</div>
+<div id="div_off_<%=sentence.id%>" style="display:none">
+<p><input class="btn btn-info" type="button" value="收起"
+   onClick="document.getElementById('div_off_<%=sentence.id%>').style.display='none';
+            document.getElementById('div_on_<%=sentence.id%>').style.display='block'">
+        </p>
+<p>
+<%@translation=Translation.new%>
+<%=form_for @translation do |f|%>
+<%=f.hidden_field :sentence_id, :value=>sentence.id%>
+<%=f.text_field :content, :class=>"form-control"%>
+<%=f.submit "提交",:class=>"btn btn-info"%>
+<%end%>
+</div>
+<%end%>
+<%sentence.translations.each do |translation|%>
+<p class="translate_sentence"><%=translation.content%></p>
+<%if translation.user_id==current_user.id%>
+<div>
+<div id="div_on_trans_<%=translation.id%>">
+<p><input class="btn btn-mini" type="button" value="编辑"
+   onClick="document.getElementById('div_off_trans_<%=translation.id%>').style.display='block';
+            document.getElementById('div_on_trans_<%=translation.id%>').style.display='none'">
+        <%=link_to "delete",translation_path(translation.id), :method=>"delete", :class=>"btn btn-danger"%>
+    </p>
+</div>
+<div id="div_off_trans_<%=translation.id%>" style="display:none">
+<p><input class="btn btn-mini" type="button" value="收起"
+   onClick="document.getElementById('div_off_trans_<%=translation.id%>').style.display='none';
+            document.getElementById('div_on_trans_<%=translation.id%>').style.display='block'">
+<%=link_to "delete",translation_path(translation.id), :method=>"delete", :class=>"btn btn-danger"%>
+        </p>
+<p>
+<%=form_for translation,  :url => {:action => 'update',:controller=>"translations"} do |f|%>
+<%=f.text_field :content, :value=>translation.content, :class=>"form-control"%>
+<%=f.hidden_field :id, :value=>translation.id%>
+<%=f.submit "确认修改", :class=>"btn btn-info" %>
+<%end%>
+</div>
+</div>
+<%end%>
+<%end%>
+</div>
+<%end%>

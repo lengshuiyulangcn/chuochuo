@@ -1,0 +1,7 @@
+<%= form_for @passage, :url=>{:action=>"create", :controller=>"passages"} do |f| %>
+<%= f.label "标题", :class=>"label label-info"%>
+  <%= f.text_field :title, :class=>"title", :class=>"form-control" ,:rows=>"1"%>
+  <%= f.label "内容", :class=>"label label-info"%>
+  <%= f.text_area :content, :autofocus => true, :class=>"form-control" ,:rows=>"20" %>
+  <%= f.submit "创建", :class=>"btn btn-info"%>
+<% end %>
