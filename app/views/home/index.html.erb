@@ -1,2 +1,13 @@
-<%=current_user.username%>
-<%=link_to "logout", destroy_user_session_path, :method=>"delete"%>
+<div class="box">
+	<center>最近投稿</center>
+	<%@passages.each do |passage|%>
+		<div class="passagebox">
+			<p><%=link_to passage.title, passage_path(passage.id)%></p>
+			完成度:<%=passage.complete_percentage%>
+			投稿人:<%=passage.user.username%>
+			标签:<%passage.my_tags.each do |tag|%>
+			<%=link_to tag.content, tag_path(tag.id)%>
+			<%end%>
+	</div>
+<%end%>
+</div>

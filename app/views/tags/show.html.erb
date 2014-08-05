@@ -1,0 +1,6 @@
+<div class="box">
+	<center><%=@tag.content%></center>
+<%@passages.each do |passage|%>
+	<p><%=link_to passage.title, passage_path(passage.id)%></p>
+<%end%>
+</div>

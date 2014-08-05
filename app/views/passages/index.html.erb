@@ -1,0 +1,11 @@
+<div class="box">
+	<center>我的投稿</center>
+	<%@passages.each do |passage|%>
+		<div class="passagebox">
+			<%=link_to passage.title, passage_path(passage.id)%>
+			<div class="pull-right">
+				<%=link_to "删除", passage_path(passage.id), :method=>"delete"%>
+			</div>
+	</div>
+<%end%>
+</div>
