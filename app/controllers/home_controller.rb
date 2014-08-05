@@ -3,4 +3,6 @@ class HomeController < ApplicationController
 	def index
 		@passages=Passage.all		
 	end
+	def show_consern
+	end
 end

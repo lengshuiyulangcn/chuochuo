@@ -14,7 +14,7 @@ class PassagesController < ApplicationController
  def edit
 	 @passage=Passage.find(params.permit(:id)[:id])
 	 if @passage.user!=current_user
-	 	flash[:notice]="不可以修改别人的发帖内容"
+	 	flash[:error]="不可以修改别人的发帖内容"
 		 redirect_to :back
 	 end
  end 
@@ -24,7 +24,7 @@ class PassagesController < ApplicationController
 	if @passage.save
         redirect_to passage_path(@passage.id)
 	else
-	flash[:error]="出错了"
+	flash[:error]="不知道为什么出错了"
 	redirect_to :back
 	end
  end
@@ -35,7 +35,7 @@ class PassagesController < ApplicationController
 		 redirect_to :back
 	 end
 	 unless Passage.delete(@passage)
-	 flash[:error]="出错了"
+	 flash[:error]="不知道为什么出错了"
 	 end
 	 redirect_to root
  end

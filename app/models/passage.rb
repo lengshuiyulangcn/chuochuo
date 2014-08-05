@@ -9,6 +9,7 @@ after_create :init_sentence
 after_create :make_tags
 	def init_sentence
 		count=0
+		Sentence.create(:passage_id=>self.id,:sentence_no=>count,:content=>self.title)
 		self.content.split("。").each do |sentence|
 		count+=1
 		Sentence.create(:passage_id=>self.id,:sentence_no=>count,:content=>sentence+"。")

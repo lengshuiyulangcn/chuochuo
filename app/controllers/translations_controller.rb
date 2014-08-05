@@ -1,9 +1,13 @@
+#encoding:utf-8
 class TranslationsController < ApplicationController
  before_filter :authenticate_user!
 	def create
 	   @translation=Translation.new(translation_params)
 	   @translation.user_id=current_user.id
 	    if @translation.save
+	    	
+	    else
+	    	flash[:error]="内容不能为空"
 	    	redirect_to :back
 	    end	
 	end

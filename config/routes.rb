@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
  get 'goods/:id'  =>'goods#think_good' , as: "think_good"
+ get 'myconcern' =>'home#show_concern', as:"concern"
 resources :sentences, :only=>:show
  resources :passages
  resources :translations
