@@ -47,7 +47,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">绰绰</a>
+	<a class="navbar-brand" href="/">绰绰</a>
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
@@ -78,10 +78,13 @@
         </div>
         <div class="col-lg-3">
           <div class="well sidebar-nav">
-            <h3>操作</h3>
+            <h3>管理</h3>
             <ul class="nav nav-list">
               <li class="nav-header">文章</li>
-              <li><%= link_to "新建文本", new_passage_path %></li>
+              <li><%= link_to "新建投稿", new_passage_path %></li>
+              <li><%= link_to "投稿管理", "#" %></li>
+              <li><%= link_to "新的消息", "#" %></li>
+              <li class="nav-header">常用标签</li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->

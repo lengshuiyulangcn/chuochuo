@@ -7,9 +7,8 @@
 </div>
 <%@sentences.each do |sentence|%>
 <div class="box">
-翻译:
 
-<p class="source_sentence"><%=sentence.content%></p>
+<p class="source_sentence"><%=link_to sentence.content, sentence_path(sentence.id)%></p>
 <%unless sentence.get_translators.include? current_user.id%>
 <div id="div_on_<%=sentence.id%>">
 <p><input class="btn btn-info" type="button" value="我来翻译"
@@ -31,9 +30,21 @@
 <%end%>
 </div>
 <%end%>
-<%sentence.translations.each do |translation|%>
-<p class="translate_sentence"><%=translation.content%></p>
-<%if translation.user_id==current_user.id%>
+最佳翻译:
+<%sentence.get_best_translations(3).each do |translation|%>
+	<div class="alert alert-success">
+		<%=translation.content%>
+		<%=link_to "赞(#{translation.good_count})",think_good_path(translation.id)%>
+		-by <%=User.find(translation.user_id).username%>
+	</div>
+<%end%>
+<%translation=Translation.where(:sentence_id=>sentence.id,:user_id=>current_user.id).first%>
+<%if translation!=nil%>
+	我的翻译:
+	<div class="alert alert-warning">
+		<%=translation.content%>
+		<%=link_to "赞(#{translation.good_count})",think_good_path(translation.id)%>
+		</div>
 <div>
 <div id="div_on_trans_<%=translation.id%>">
 <p><input class="btn btn-mini" type="button" value="编辑"
@@ -56,7 +67,6 @@
 <%end%>
 </div>
 </div>
-<%end%>
 <%end%>
 </div>
 <%end%>

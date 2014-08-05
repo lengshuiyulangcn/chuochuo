@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
-  
+ get 'goods/:id'  =>'goods#think_good' , as: "think_good"
+resources :sentences, :only=>:show
  resources :passages
  resources :translations
   # The priority is based upon order of creation: first created -> highest priority.

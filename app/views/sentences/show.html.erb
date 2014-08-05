@@ -1,0 +1,11 @@
+<div class="box">
+<p class="source_sentence"><%=@sentence.content%></p>
+<%@translations.each do |translation|%>
+	<div class="alert alert-success">
+		<%=translation.content%>
+		<%=link_to "赞(#{translation.good_count})",think_good_path(translation.id)%>
+		-by <%=User.find(translation.user_id).username%>
+	</div>
+<%end%>
+</div>
+<%=link_to "返回文章", passage_path(@sentence.passage_id)%>

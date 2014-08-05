@@ -1,4 +1,5 @@
 class TranslationsController < ApplicationController
+ before_filter :authenticate_user!
 	def create
 	   @translation=Translation.new(translation_params)
 	   @translation.user_id=current_user.id

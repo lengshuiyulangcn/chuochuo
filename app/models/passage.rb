@@ -9,7 +9,7 @@ after_create :init_sentence
 		count=0
 		self.content.split("。").each do |sentence|
 		count+=1
-   		Sentence.create(:passage_id=>self.id,:sentence_no=>count,:content=>sentence)
+		Sentence.create(:passage_id=>self.id,:sentence_no=>count,:content=>sentence+"。")
 		end
    	end
 end

@@ -17,7 +17,8 @@ class PassagesController < ApplicationController
 	if @passage.save
         redirect_to passage_path(@passage.id)
 	else
-	redirect_to passage_path 1
+		flash[:error]="出错了"
+	redirect_to :back
 	end
  end
 

@@ -9,4 +9,7 @@ has_many :translations
 		end
 		result
 	end
+	def get_best_translations number
+		self.translations.order("good_count DESC").limit number	
+	end
 end
