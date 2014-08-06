@@ -5,6 +5,7 @@ Rails.application.routes.draw do
  get 'myconcern/:id' =>'home#show_concern', as:"concern"
  resources :sentences, :only=>:show
  resources :passages
+ resources :notifications, :only=>[:index,:destroy]
  resources :translations
  resources :users, :only=>[:show, :edit, :update]
  resources :tags

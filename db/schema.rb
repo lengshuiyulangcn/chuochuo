@@ -11,11 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140806094403) do
+ActiveRecord::Schema.define(version: 20140806110823) do
 
   create_table "goods", force: true do |t|
     t.integer  "user_id"
     t.integer  "translation_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "notifications", force: true do |t|
+    t.integer  "user_id"
+    t.string   "content"
+    t.boolean  "read",       default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -81,10 +81,11 @@
             <h3>管理</h3>
 	    <ul class="nav nav-list">
 		    <%if current_user%>
-		    <li class="nav-header">用户</li>
-              <li><%= link_to "用户信息", edit_user_path(current_user.id) %></li>
-              <li><%= link_to "新的消息", "#" %></li>
-      		    <%end%>
+			    <li class="nav-header">用户</li>
+			    <li><%= link_to "#{current_user.count_notifications}", notifications_path, :class=>"badge #{current_user.count_notifications>0 ? 'alert-warning': 'alert-info'} pull-right"%></li>
+              <li style="width: 50%;"><%= link_to "用户信息", edit_user_path(current_user.id) %>
+	      </li>
+      <%end%>
 	      <li class="nav-header">文章</li>
               <li><%= link_to "新建投稿", new_passage_path %></li>
               <li><%= link_to "投稿管理", passages_path %></li>

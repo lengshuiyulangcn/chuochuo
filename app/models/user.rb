@@ -8,7 +8,8 @@ devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 has_many :passages
 has_many :translations
-   def my_concern
+has_many :notifications
+def my_concern
    		passages=[]
    		Translation.where(:user_id=>self.id).each do |translation|
    			passages << translation.sentence.passage
@@ -21,5 +22,8 @@ has_many :translations
 			count+=translation.goods.size
 		end
 		return count
+   end
+   def count_notifications
+   	Notification.where(:user_id=>self.id, :read=>false).size
    end
 end
