@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140805073432) do
+ActiveRecord::Schema.define(version: 20140806022049) do
 
   create_table "goods", force: true do |t|
     t.integer  "user_id"
@@ -23,11 +23,12 @@ ActiveRecord::Schema.define(version: 20140805073432) do
   create_table "passages", force: true do |t|
     t.string   "content"
     t.integer  "user_id"
-    t.integer  "viewed",     default: 0
+    t.integer  "viewed",             default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
     t.string   "label"
+    t.datetime "last_translated_at", default: '2014-08-06 02:21:41'
   end
 
   create_table "sentences", force: true do |t|

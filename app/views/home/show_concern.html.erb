@@ -1,18 +1,28 @@
 <%@passages=[]%>
    		<%Translation.where(:user_id=>current_user.id).each do |translation|%>
-   			<%@passages << translation.sentence.passage%>
-   		<%end%>
-   		<%@passages.uniq!%>
-<div class="box">
+			   			<%@passages << translation.sentence.passage%>
+						   		<%end%>
+								   		<%@passages.uniq!%>
+<div class="topicbox">
 	<center>我参与的</center>
 	<%@passages.each do |passage|%>
-		<div class="passagebox">
-			<p><%=link_to passage.title, passage_path(passage.id)%></p>
-			完成度:<%=passage.complete_percentage%>
+		<div class="topics">
+			<div class="topic topic_line">
+				<div class="title"><%=link_to passage.title, passage_path(passage.id)%></div>
+					<div class="progress progress-info pull-right" style="width: 20%">
+						<div class="progress-bar" style="width: <%=passage.complete_percentage%>;">
+					<%=passage.complete_percentage%>
+						</div>
+					  </div>
+				<div class="otherinfo">
 			投稿人:<%=passage.user.username%>
-			标签:<%passage.my_tags.each do |tag|%>
-			<%=link_to tag.content, tag_path(tag.id)%>
-			<%end%>
-	</div>
+		最后更新：<%= timeago_tag passage.last_translated_at, :nojs => true, :limit => 10.days.ago, :lang=>:zh %>
+		    标签:<%passage.my_tags.each do |tag|%>
+		    <%=link_to tag.content, tag_path(tag.id)%>
+		<%end%>
+		       </div>
+		    </div>
+	    </div>
+
 <%end%>
 </div>

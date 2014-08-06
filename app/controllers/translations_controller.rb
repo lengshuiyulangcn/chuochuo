@@ -5,11 +5,13 @@ class TranslationsController < ApplicationController
 	   @translation=Translation.new(translation_params)
 	   @translation.user_id=current_user.id
 	    if @translation.save
-	    	
+	    	flash[:error]="创建成功"
+	    		
 	    else
 	    	flash[:error]="内容不能为空"
+	    end
 	    	redirect_to :back
-	    end	
+
 	end
 	def edit
 	    @translation=Translation.find(params.permit(:id)[:id])
