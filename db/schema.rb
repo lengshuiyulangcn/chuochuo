@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140806022049) do
+ActiveRecord::Schema.define(version: 20140806094403) do
 
   create_table "goods", force: true do |t|
     t.integer  "user_id"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20140806022049) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "good_count",  default: 0
+    t.integer  "passage_id"
   end
 
   create_table "users", force: true do |t|
@@ -75,6 +76,9 @@ ActiveRecord::Schema.define(version: 20140806022049) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username"
+    t.string   "icon"
+    t.string   "bio"
+    t.string   "qq"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

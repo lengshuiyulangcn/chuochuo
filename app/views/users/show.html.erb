@@ -1,0 +1,10 @@
+<div class="box">
+<%=image_tag @user.icon, :style=>"width: 100px;"%>
+<P>他有<%=@user.count_goods%>条翻译被赞</p>
+<p><%= "自我介绍:"%>
+<%=@user.bio%></p>
+<p><%= "扣扣号码:"%>
+<%=@user.qq%>
+</p>
+<%=link_to "查看他参与的翻译",concern_path(@user.id)%>
+</div>

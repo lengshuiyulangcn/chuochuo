@@ -30,6 +30,7 @@
 <%@translation=Translation.new%>
 <%=form_for @translation do |f|%>
 <%=f.hidden_field :sentence_id, :value=>sentence.id%>
+<%=f.hidden_field :passage_id, :value=>@passage.id%>
 <%=f.text_field :content, :class=>"form-control"%>
 <%=f.submit "提交",:class=>"btn btn-info"%>
 <%end%>

@@ -1,6 +1,7 @@
 #encoding:utf-8
 class Passage < ActiveRecord::Base
-belongs_to :user
+	has_many :translations
+	belongs_to :user
       	has_many :sentences, :dependent => :delete_all
   validates_length_of :content, minimum:10, maximum: 4096, too_short: "should be longer than 10 characters", too_long: "no longer than 4096 characters"
 validates_length_of :title, minimum:2, maximum: 255, too_short: "should be longer than 2 characters", too_long: "no longer than 255 characters"
@@ -29,7 +30,7 @@ after_create :make_tags
 		total=self.sentences.size
 		translated=0
 		self.sentences.each{|sentence| translated+=1 if sentence.translations!=[]}
-		return (translated.to_f*100/total).to_i.to_s+'%'
+		return (translated.to_f*100/total).to_i
 	end
 	def my_tags
 		result=[]
@@ -41,5 +42,9 @@ after_create :make_tags
 		else
 			return []
 		end
+	end
+	def user_percentage id
+		translations=User.find(id).translations&self.translations
+		return (translations.size.to_f*100/self.sentences.size).to_i
 	end
 end

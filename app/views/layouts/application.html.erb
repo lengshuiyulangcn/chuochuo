@@ -77,12 +77,18 @@
         </div>
         <div class="col-lg-3">
           <div class="well sidebar-nav">
+			    <div class="pull-right"><%=image_tag current_user.icon.thumb if current_user%></div>
             <h3>管理</h3>
-            <ul class="nav nav-list">
-              <li class="nav-header">文章</li>
+	    <ul class="nav nav-list">
+		    <%if current_user%>
+		    <li class="nav-header">用户</li>
+              <li><%= link_to "用户信息", edit_user_path(current_user.id) %></li>
+              <li><%= link_to "新的消息", "#" %></li>
+      		    <%end%>
+	      <li class="nav-header">文章</li>
               <li><%= link_to "新建投稿", new_passage_path %></li>
               <li><%= link_to "投稿管理", passages_path %></li>
-              <li><%= link_to "我参与的", concern_path %></li>
+              <li><%= link_to "我参与的", concern_path(current_user.id) if current_user%></li>
               <li class="nav-header">常用标签</li>
               </ul>
 		<%most_used_tags(10).each do |tag|%>
