@@ -2,7 +2,7 @@
 class PassagesController < ApplicationController
  before_filter :authenticate_user!
  def index
-	 @passages=Passage.where(:user_id=>current_user.id)
+	 @passages=Passage.where(:user_id=>current_user.id).order("last_translated_at DESC").paginate(:page => params[:page], :per_page => 10)	
  end
  def show
  	@passage=Passage.find(params.permit(:id)[:id])
@@ -21,6 +21,7 @@ class PassagesController < ApplicationController
  def create
 	@passage=Passage.new(passage_params)
 	@passage.user_id=current_user.id
+	@passage.last_translated_at=Time.now
 	if @passage.save
         redirect_to passage_path(@passage.id)
 	else
