@@ -1,0 +1,8 @@
+   <div class="label label-info">编辑讨论</div>
+   <div id="comment">
+    <%= form_for @comment do |f| %>
+    <%= f.kindeditor :content, :simple_mode => true,:editor_id=>'comment_editor' %>
+    <%=f.submit "发送", :class=>"btn btn-info"%>
+    <%end%>
+    </div>
+

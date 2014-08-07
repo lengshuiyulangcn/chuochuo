@@ -1,6 +1,7 @@
 #encoding:utf-8
 class Passage < ActiveRecord::Base
 	has_many :translations
+	has_many :comments, :dependent => :delete_all
 	belongs_to :user
       	has_many :sentences, :dependent => :delete_all
   validates_length_of :content, minimum:10, maximum: 4096, too_short: "should be longer than 10 characters", too_long: "no longer than 4096 characters"

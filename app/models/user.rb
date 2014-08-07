@@ -9,6 +9,7 @@ devise :database_authenticatable, :registerable,
 has_many :passages
 has_many :translations
 has_many :notifications
+has_many :comments
 def my_concern
    		passages=[]
    		Translation.where(:user_id=>self.id).each do |translation|

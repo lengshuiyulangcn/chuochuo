@@ -7,6 +7,8 @@ Rails.application.routes.draw do
  resources :passages
  resources :notifications, :only=>[:index,:destroy]
  resources :translations
+ resources :comments
+get 'comment/:id'=>'comments#passage_comment', as: 'passageComment'
  resources :users, :only=>[:show, :edit, :update]
  resources :tags
  # The priority is based upon order of creation: first created -> highest priority.

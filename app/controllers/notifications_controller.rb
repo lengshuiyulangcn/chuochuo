@@ -3,7 +3,7 @@ class NotificationsController < ApplicationController
  before_filter :authenticate_user!
 after_filter :mark_read, :only => :index
  def index
-	  @notifications=current_user.notifications
+	 @notifications=current_user.notifications.order("created_at DESC")
   end
 
   def destroy

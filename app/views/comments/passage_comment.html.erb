@@ -1,0 +1,32 @@
+<ul class="breadcrumb">
+	        <li><%=link_to "首页", root_path%></li>
+		<li><%=link_to @passage.title, passage_path(@passage.id)%></li>
+		<li>讨论</li>
+      	</ul> 
+<center><%=link_to @passage.title, passage_path(@passage.id)%>的讨论楼</center>
+<%@comments.each do |comment|%>
+<div class="reply">
+	<div class="face pull-left"><%=link_to image_tag(comment.user.icon.thumb), user_path(comment.user.id)%></div>
+	<div class="infos">
+		<div class="info">
+			<%=comment.user.username%>(<%=comment.user.bio%>)  
+		<%= timeago_tag comment.created_at, :nojs => true, :limit => 10.days.ago, :lang=>:zh %>
+		<a href="#comment" onclick='comment_editor.appendHtml("<p>回复<%=comment.flour_id%>楼@<%=comment.user.username%></p> ")' > 快速回复</a>
+		<%=link_to "编辑",edit_comment_path(comment.id)%>
+		<div class="pull-right" id=<%=comment.flour_id%>><%=comment.flour_id%>#</div>
+		</div>
+		
+		<div class="body"><%=comment.content.html_safe%></div>
+	</div>
+</div>
+<%end%>
+<br>
+<br>
+	<div class="label label-info">发表讨论</div>
+	<div id="comment">
+	<%= form_for @comment do |f| %>
+		<%= f.kindeditor :content, :simple_mode => true,:editor_id=>'comment_editor' %>
+	<%= f.hidden_field :passage_id, :value=>@passage.id%>
+	<%=f.submit "发送", :class=>"btn btn-info"%>
+<%end%>
+	</div>

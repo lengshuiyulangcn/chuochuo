@@ -1,0 +1,27 @@
+// Place all the styles related to the comments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.reply {
+	border-bottom: 1px solid #DDD;
+	padding: 8px 10px;
+	margin: 0 -10px;
+	background: #FFF;
+}
+.reply .face {
+	padding-right: 8px;
+	width: 48px;
+	margin-left: 0;
+}
+.reply .info {
+	font-size: 12px;
+	color: #bbb;
+	height: 20px;
+}
+.reply .infos {
+	padding-left: 58px;
+}
+.reply .body {
+	text-align: left;
+	margin-top: 5px;
+}

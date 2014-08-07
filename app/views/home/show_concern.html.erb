@@ -1,3 +1,7 @@
+<ul class="breadcrumb"> 
+	<li><%=link_to "首页", root_path%></li>
+	<li>参与</li>
+	</ul>   
 <div class="topicbox">
 	<center><%=@user.username%>参与的(个人进度)</center>
 	<%@passages.each do |passage|%>
@@ -7,7 +11,9 @@
 			                <%=link_to image_tag(passage.user.icon.thumb),user_path(passage.user.id)%>
 				</div>
 				<%mypercent=passage.user_percentage(@user.id)%>
-				<div class="title"><%=link_to passage.title, passage_path(passage.id)%></div>
+				<div class="title"><%=link_to passage.title, passage_path(passage.id)%>
+				<%=link_to passage.comments.size, passageComment_path(passage.id), :class=>"badge pull-right"%>
+			</div>
 				          <div class="progress progress-info pull-right" style="width: 20%">
 					<div class="progress-bar progress-bar-success" style="width: <%=mypercent%>%;"><%=mypercent%>%</div>
 					  </div>
@@ -22,5 +28,7 @@
 	    </div>
 
     <%end%>
-    <%= will_paginate @passages %>
+    <div class="flickr_pagination">
+	                <%= will_paginate @passages %>
+			            </div>
 </div>

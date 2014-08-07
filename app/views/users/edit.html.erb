@@ -1,6 +1,6 @@
 <%=form_for @user,  :html => {:multipart => true}  do |f|%>
 	<div class="box">
-		<div><%=image_tag @user.icon, :style=>"width: 100px;"%>
+		<div><%=image_tag @user.icon.thumb"%>
 	<%=f.file_field :icon%>
        </div>
 		<p><%=f.label "自我介绍"%>

@@ -1,6 +1,16 @@
+<ul class="breadcrumb">
+	        <li><%=link_to "首页", root_path%></li>
+		        <li>翻译</li>
+			        </ul> 
 <center>
 <span style="font-size: 16px;"> <%=@passage.title%></span>
 </center>
+<div class="info">
+	由<%=link_to @passage.user.username, user_path(@passage.user.id)%>
+	于<%= timeago_tag @passage.created_at, :nojs => true, :limit => 10.days.ago, :lang=>:zh %>
+	发起
+	<%=link_to "进入讨论", passageComment_path(@passage.id)%>
+</div>
 <div class="box">
 	<p>预览:</p>
 <span style="color: blue;">

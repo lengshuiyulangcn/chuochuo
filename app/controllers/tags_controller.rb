@@ -14,10 +14,12 @@ class TagsController < ApplicationController
     def show
 	 @tag=Tag.find(params.permit(:id)[:id])
 	 taglists=Taglist.where(:tag_id=>@tag.id)
-	@passages=[]
+	passage_ids=[]
 	taglists.each do |taglist|
-		@passages << Passage.find(taglist.passage_id)
+		passage_ids << taglist.passage_id
 	end
+ @passages = Passage.where(:id => passage_ids.uniq).order("last_translated_at DESC").paginate(:page => params[:page], :per_page => 10)
+
     end
     def delete
     end

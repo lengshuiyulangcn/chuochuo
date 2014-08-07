@@ -1,11 +1,11 @@
 <%@notifications.each do |notification|%>
 	<%unless notification.read%>
-	<div class="alert alert-error">
+	<div class="alert alert-waring">
 	<%=notification.content.html_safe%>
 	<%=link_to "x", notification_path(notification.id), :method=>"delete",:class=>"pull-right"%>
         </div>
 	<%else%>
-	<div class="alert alert-info">
+	<div class="alert alert-success">
 	<%=notification.content.html_safe%>
 	<%=link_to "x", notification_path(notification.id), :method=>"delete",:class=>"pull-right"%>
 	 </div>
