@@ -51,7 +51,7 @@
 	<div class="alert alert-success">
 		<%=translation.content%>
 		<%=link_to "赞(#{translation.good_count})",think_good_path(translation.id)%>
-		-by <%=User.find(translation.user_id).username%>
+		<p class="pull-right">by <%=link_to translation.user.username, user_path(translation.user.id)%></p>
 	</div>
 <%end%>
 <%translation=Translation.where(:sentence_id=>sentence.id,:user_id=>current_user.id).first%>

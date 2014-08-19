@@ -5,7 +5,6 @@ module ApplicationHelper
 			tag=Tag.find(taglist.tag_id)
 			tag_hash[tag]+=1
 		end
-	print	tag_hash.sort.first
 		tag_hash.sort{|(a,b),(c,d)| d<=>b}.first num
 	end
 

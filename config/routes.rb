@@ -1,16 +1,17 @@
 Rails.application.routes.draw do
   devise_for :users
-  root 'home#index'
- get 'goods/:id'  =>'goods#think_good' , as: "think_good"
- get 'myconcern/:id' =>'home#show_concern', as:"concern"
+  root :to=> 'home#index'
+ get '/goods/:id'  =>'goods#think_good' , as: "think_good"
+ get '/myconcern/:id' =>'home#show_concern', as:"concern"
  resources :sentences, :only=>:show
  resources :passages
  resources :notifications, :only=>[:index,:destroy]
  resources :translations
  resources :comments
-get 'comment/:id'=>'comments#passage_comment', as: 'passageComment'
+get '/comment/:id'=>'comments#passage_comment', as: 'passageComment'
  resources :users, :only=>[:show, :edit, :update]
  resources :tags
+get '*path', controller: 'application', action: 'render_404'
  # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,12 +1,16 @@
 <%=form_for @user,  :html => {:multipart => true}  do |f|%>
 	<div class="box">
-		<div><%=image_tag @user.icon.thumb"%>
+	<%=f.label "选择上传头像"%>
+		<div><%=image_tag @user.icon.thumb%>
 	<%=f.file_field :icon%>
        </div>
-		<p><%=f.label "自我介绍"%>
-	<%=f.text_area :bio%></p>
-	<p><%=f.label "扣扣号码"%>
-<%=f.text_field :qq%></p>
+	<br>
+		<p><%=f.label "自我介绍"%></p>
+	<%=f.text_area :bio, :style=>"width: 700px; height: 100px;"%>
+	<br>
+	<p><%=f.label "扣扣号码"%></p>
+<p><%=f.text_field :qq%></p>
+<br>
 <%=f.submit "提交", :class=>"btn btn-info"%>
 	</div>
 <%end%>

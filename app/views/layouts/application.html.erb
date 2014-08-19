@@ -47,7 +47,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-	<a class="navbar-brand" href="/">一起译日文</a>
+	<a class="navbar-brand" href="/chuochuo">一起译什么文都可以</a>
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
@@ -57,10 +57,9 @@
         </ul>
  <ul class="nav pull-right">
               <%if current_user!=nil%>
-              <li class="dropdown">
+<li class="dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=current_user.username%><b class="caret"></b></a>
 <ul class="dropdown-menu">
-                  <li><%= link_to "更换密码", edit_user_password_path  %></li>
                   <li><%= link_to '退出登录', destroy_user_session_path, :method=>"delete" %></li>
 	  </ul>
               <%end%>
@@ -81,6 +80,7 @@
             <h3>管理</h3>
 	    <ul class="nav nav-list">
 		    <%if current_user%>
+积分:<li class="badge pull-right"><%=current_user.point%></li>              
 			    <li class="nav-header">用户</li>
 			    <li><%= link_to "#{current_user.count_notifications}", notifications_path, :class=>"badge #{current_user.count_notifications>0 ? 'alert-warning': 'alert-info'} pull-right"%></li>
               <li style="width: 50%;"><%= link_to "用户信息", edit_user_path(current_user.id) %>
@@ -89,14 +89,17 @@
 			<li><%=link_to "登录", new_user_session_path%></li>
       <%end%>
 	      <li class="nav-header">文章</li>
-              <li><%= link_to "新建投稿", new_passage_path %></li>
+              <li><%= link_to "新建投稿(消耗30积分)", new_passage_path %></li>
               <li><%= link_to "投稿管理", passages_path %></li>
               <li><%= link_to "我参与的", concern_path(current_user.id) if current_user%></li>
               <li class="nav-header">常用标签</li>
               </ul>
-		<%most_used_tags(10).each do |tag|%>
+		<%most_used_tags(30).each do |tag|%>
 			<%=link_to tag[0].content+"(#{tag[1]})", tag_path(tag[0].id)%>
 		<%end%>
+		<center>欢迎新用户:<%=link_to User.all[-1].username, user_path(User.all[-1].id)%></center>
+		<center>联系我: gyorou@tjjtds.me</center>
+		<center>ver 0.12(添加英文自动断句)</center>
           </div><!--/.well -->
         </div><!--/span-->
       </div><!--/row-->

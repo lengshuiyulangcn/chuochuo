@@ -17,9 +17,11 @@ def count_good
  end
  def notify
 	 unless user==self.passage.user
-		 content="用户<a href='users/#{user.id}'>#{user.username}</a>翻译了你的投稿<a href='/passages/#{passage.id}'>#{passage.title}</a>"
+		 content="用户<a href='/chuochuo/users/#{user.id}'>#{user.username}</a>翻译了你的投稿<a href='/chuochuo/passages/#{passage.id}'>#{passage.title}</a>"
 		 Notification.create(:user_id=>self.passage.user.id, :content=>content)
 	 end
+	user.point+=1
+	user.save
  end
 
 end

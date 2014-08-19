@@ -5,6 +5,8 @@ class GoodsController < ApplicationController
 		if good!=nil
 			translation=good.translation
 			translation.update(:good_count=>translation.good_count-1)
+		 good.user.point-=1 if current_user!=good.user
+		 good.user.save
 		  Good.delete(good)
 		else
 			good=Good.new

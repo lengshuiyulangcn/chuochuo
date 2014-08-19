@@ -60,7 +60,7 @@ config.authentication_keys = [ :username ]
   # enable it only for database authentication. The supported strategies are:
   # :database      = Support basic authentication with authentication key + password
   # config.http_authenticatable = false
-
+config.authentication_keys = [ :username ] 
   # If http headers should be returned for AJAX requests. True by default.
   # config.http_authenticatable_on_xhr = true
 

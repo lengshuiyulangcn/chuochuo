@@ -22,7 +22,7 @@ end
 		              unless uid==self.user_id
 		              notification=Notification.new
 		              notification.user_id=uid
-			      notification.content="用户<a href='/users/#{user_id}'>#{user.username}</a>在<a href='/comment/#{passage.id}'>#{passage.title}的讨论楼</a>中的#{self.flour_id}楼提到你"
+			      notification.content="用户<a href='/chuochuo/users/#{user_id}'>#{user.username}</a>在<a href='/chuochuo/comment/#{passage.id}'>#{passage.title}的讨论楼</a>中的#{self.flour_id}楼提到你"
 		              notification.save
 		              end
 		         end

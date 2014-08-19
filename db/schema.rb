@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140807025927) do
+ActiveRecord::Schema.define(version: 20140818061645) do
 
   create_table "comments", force: true do |t|
     t.string   "content"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20140807025927) do
     t.datetime "updated_at"
     t.string   "title"
     t.string   "label"
-    t.datetime "last_translated_at", default: '2014-08-06 02:21:41'
+    t.datetime "last_translated_at", default: '2014-08-07 08:45:03'
   end
 
   create_table "sentences", force: true do |t|
@@ -80,12 +80,12 @@ ActiveRecord::Schema.define(version: 20140807025927) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",  null: false
+    t.string   "encrypted_password",     default: "",  null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,   null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 20140807025927) do
     t.string   "icon"
     t.string   "bio"
     t.string   "qq"
+    t.integer  "point",                  default: 100
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

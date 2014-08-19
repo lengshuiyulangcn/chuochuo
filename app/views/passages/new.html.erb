@@ -1,9 +1,9 @@
 <%= form_for @passage, :url=>{:action=>"create", :controller=>"passages"} do |f| %>
 <%= f.label "标题", :class=>"label label-info"%>
   <%= f.text_field :title, :class=>"title", :class=>"form-control" ,:rows=>"1"%>
-  <%= f.label "内容", :class=>"label label-info"%>
+  <%= f.label "内容(请确保句子分隔符为句号)", :class=>"label label-info"%>
   <%= f.text_area :content, :autofocus => true, :class=>"form-control" ,:rows=>"20" %>
-  <%= f.label "标签(使用空格隔开)", :class=>"label label-info"%>
+  <%= f.label "标签(不得为空，使用空格隔开)", :class=>"label label-info"%>
   <%= f.text_field :label, :class=>"title", :class=>"form-control" ,:rows=>"1"%>
   <%= f.submit "创建", :class=>"btn btn-info"%>
 <% end %>

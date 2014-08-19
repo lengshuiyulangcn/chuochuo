@@ -19,6 +19,7 @@ class PassagesController < ApplicationController
 	 end
  end 
  def create
+	unless current_user.point <30
 	@passage=Passage.new(passage_params)
 	@passage.user_id=current_user.id
 	@passage.last_translated_at=Time.now
@@ -26,6 +27,10 @@ class PassagesController < ApplicationController
         redirect_to passage_path(@passage.id)
 	else
 	flash[:error]="不知道为什么出错了"
+	redirect_to :back
+	end
+	else
+	flash[:error]="积分不够不能新建翻译。翻译句子可以获取积分哦"
 	redirect_to :back
 	end
  end
@@ -38,7 +43,7 @@ class PassagesController < ApplicationController
 	 unless Passage.delete(@passage)
 	 flash[:error]="不知道为什么出错了"
 	 end
-	 redirect_to root
+	 redirect_to root_path
  end
  private
   def passage_params

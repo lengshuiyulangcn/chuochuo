@@ -4,6 +4,7 @@ class Passage < ActiveRecord::Base
 	has_many :comments, :dependent => :delete_all
 	belongs_to :user
       	has_many :sentences, :dependent => :delete_all
+      	has_many :taglists, :dependent => :delete_all
   validates_length_of :content, minimum:10, maximum: 4096, too_short: "should be longer than 10 characters", too_long: "no longer than 4096 characters"
 validates_length_of :title, minimum:2, maximum: 255, too_short: "should be longer than 2 characters", too_long: "no longer than 255 characters"
 validates :label, :presence => true
@@ -12,10 +13,19 @@ after_create :make_tags
 	def init_sentence
 		count=0
 		Sentence.create(:passage_id=>self.id,:sentence_no=>count,:content=>self.title)
-		self.content.split("。").each do |sentence|
+		if self.content.language!=:english	
+		self.content.split(/。|\n/).each do |sentence|
 		count+=1
-		Sentence.create(:passage_id=>self.id,:sentence_no=>count,:content=>sentence+"。")
+		Sentence.create(:passage_id=>self.id,:sentence_no=>count,:content=>sentence) if sentence.chomp!=""
 		end
+		else
+		 Scalpel.cut(self.content).each do |sentence|
+		count+=1
+		Sentence.create(:passage_id=>self.id,:sentence_no=>count,:content=>sentence) if sentence.chomp!=""
+		end
+		end
+		user.point-=30;
+		user.save
    	end
 	def make_tags
 		tags=self.label.split(" ")

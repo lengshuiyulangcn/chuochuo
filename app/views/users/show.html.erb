@@ -1,10 +1,19 @@
 <div class="box">
-<%=image_tag @user.icon.thumb%>
-<P>他有<%=@user.count_goods%>条翻译被赞</p>
-<p><%= "自我介绍:"%>
-<%=@user.bio%></p>
-<p><%= "扣扣号码:"%>
+<div class="label label-info">用户名:</div>
+<%=@user.username%>
+<%=image_tag @user.icon, :class=>"pull-right", :style=>"width: 150px;"%>
+<br>
+<br>
+<p class="label label-info"><%= "自我介绍:"%></p>
+<%=@user.bio%>
+<br>
+<br>
+<p class="label label-info"><%= "扣扣号码:"%>
+</p>
 <%=@user.qq%>
+<P>他有<%=@user.count_goods%>条翻译被赞</p>
+<P><span class="label label-info">积分:</span>
+<span class="badge"><%=@user.point%></span>
 </p>
 <%=link_to "查看他参与的翻译",concern_path(@user.id)%>
 </div>

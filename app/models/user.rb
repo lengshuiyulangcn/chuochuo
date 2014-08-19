@@ -10,6 +10,13 @@ has_many :passages
 has_many :translations
 has_many :notifications
 has_many :comments
+after_create :init
+
+def init
+	self.bio="6cm的壮汉"
+	self.icon="../2/Contact.png"
+	self.save
+end
 def my_concern
    		passages=[]
    		Translation.where(:user_id=>self.id).each do |translation|
