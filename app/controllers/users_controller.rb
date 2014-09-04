@@ -1,6 +1,6 @@
 #encoding:utf-8
 class UsersController < ApplicationController
- before_filter :authenticate_user!
+ before_filter :authenticate_user!, :except=>"show"
 	def edit
 		@user=User.find(params.permit(:id)[:id])
 		if @user!=current_user

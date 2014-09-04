@@ -86,10 +86,10 @@
               <li style="width: 50%;"><%= link_to "用户信息", edit_user_path(current_user.id) %>
       </li>
       		<%else%>
-			<li><%=link_to "登录", new_user_session_path%></li>
+			<li><%=link_to "登录/注册", new_user_session_path%></li>
       <%end%>
 	      <li class="nav-header">文章</li>
-              <li><%= link_to "新建投稿(消耗30积分)", new_passage_path %></li>
+              <li><%= link_to "新建投稿(消耗30积分)", new_passage_path,'data-no-turbolink' => true %></li>
               <li><%= link_to "投稿管理", passages_path %></li>
               <li><%= link_to "我参与的", concern_path(current_user.id) if current_user%></li>
               <li class="nav-header">常用标签</li>
@@ -99,7 +99,7 @@
 		<%end%>
 		<center>欢迎新用户:<%=link_to User.all[-1].username, user_path(User.all[-1].id)%></center>
 		<center>联系我: gyorou@tjjtds.me</center>
-		<center>ver 0.12(添加英文自动断句)</center>
+		<center><a href="/chuochuo/about">ver 0.16 支持图文混排和自定义css格式</a></center>
           </div><!--/.well -->
         </div><!--/span-->
       </div><!--/row-->

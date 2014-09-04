@@ -13,6 +13,7 @@ gem 'will_paginate'
 gem 'passenger'
 gem 'whatlanguage'
 gem 'scalpel'
+gem 'nokogiri'
 gem 'rails_kindeditor'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

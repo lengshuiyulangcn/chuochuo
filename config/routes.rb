@@ -8,10 +8,11 @@ Rails.application.routes.draw do
  resources :notifications, :only=>[:index,:destroy]
  resources :translations
  resources :comments
+get '/passages/nologin/:id'=>"passages#nologin", as:'nologin'
 get '/comment/:id'=>'comments#passage_comment', as: 'passageComment'
  resources :users, :only=>[:show, :edit, :update]
  resources :tags
-get '*path', controller: 'application', action: 'render_404'
+#get '*path', controller: 'application', action: 'render_404'
  # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

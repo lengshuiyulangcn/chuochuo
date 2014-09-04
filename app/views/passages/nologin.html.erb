@@ -1,0 +1,34 @@
+
+<ul class="breadcrumb">
+	        <li><%=link_to "首页", root_path%></li>
+		        <li>翻译</li>
+			        </ul> 
+<div class="pull-right">
+参与者:
+<%@users.each do |user|%>
+<%=link_to image_tag(user.icon.thumb), user_path(user.id)%>
+<%end%>
+</div>
+<center>
+<span style="font-size: 16px;"> <%=@passage.title%></span>
+</center>
+
+<div class="info">
+	由<%=link_to @passage.user.username, user_path(@passage.user.id)%>
+	于<%= timeago_tag @passage.created_at, :nojs => true, :limit => 10.days.ago, :lang=>:zh %>
+	发起
+	<%=link_to "进入讨论", passageComment_path(@passage.id)%>
+</div>
+<br>
+<div class="box">
+	<p>预览:</p>
+<span style="color: blue;">
+	<%@passage.sentences.each do |line|%>
+	<%=line.content.html_safe%>
+	<p class="translate_sentence"><%=line.get_best_translations(1).first.content if line.get_best_translations(1)!=[]%></p>
+	<%end%>
+</span>
+<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"<%=@passage.title%>","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+<%=link_to "我来翻译", passage_path(@passage.id), :class=>"btn btn-info"%>

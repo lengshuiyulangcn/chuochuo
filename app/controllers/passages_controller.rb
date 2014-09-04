@@ -1,11 +1,16 @@
 #encoding:utf-8
 class PassagesController < ApplicationController
- before_filter :authenticate_user!
+ before_filter :authenticate_user!, :except=>'nologin'
  def index
 	 @passages=Passage.where(:user_id=>current_user.id).order("last_translated_at DESC").paginate(:page => params[:page], :per_page => 10)	
  end
  def show
- 	@passage=Passage.find(params.permit(:id)[:id])
+	@passage=Passage.find(params.permit(:id)[:id])
+	@users=[]
+	@passage.translations.each do |translation|
+	 @users << translation.user
+	end
+	@users.uniq!
 	@sentences=Sentence.where(:passage_id=>@passage.id).order(:sentence_no)
  end
  def new
@@ -42,8 +47,22 @@ class PassagesController < ApplicationController
 	 end
 	 unless Passage.delete(@passage)
 	 flash[:error]="不知道为什么出错了"
+	 else
+		Taglist.destroy_all(:passage_id=>@passage.id)
 	 end
-	 redirect_to root_path
+	 redirect_to :back
+ end
+ def nologin
+	if user_signed_in?
+	redirect_to  passage_path(params.permit(:id)[:id])
+	end	
+ 	@passage=Passage.find(params.permit(:id)[:id])
+	@users=[]
+	@passage.translations.each do |translation|
+	 @users << translation.user
+	end
+	@users.uniq!
+	@sentences=Sentence.where(:passage_id=>@passage.id).order(:sentence_no)
  end
  private
   def passage_params

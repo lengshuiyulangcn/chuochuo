@@ -10,7 +10,7 @@
 	<div class="infos">
 		<div class="info">
 			<%=comment.user.username%>(<%=comment.user.bio%>)  
-		<%= timeago_tag comment.created_at, :nojs => true, :limit => 10.days.ago, :lang=>:zh %>
+		<%= timeago_tag comment.created_at, :nojs => true, :limit => 10.days.ago %>
 		<a href="#comment" onclick='comment_editor.appendHtml("<p>回复<%=comment.flour_id%>楼@<%=comment.user.username%></p> ")' > 快速回复</a>
 		<%=link_to "编辑",edit_comment_path(comment.id)%>
 		<div class="pull-right" id=<%=comment.flour_id%>><%=comment.flour_id%>#</div>

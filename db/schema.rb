@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140818061645) do
+ActiveRecord::Schema.define(version: 20140904050843) do
 
   create_table "comments", force: true do |t|
     t.string   "content"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20140818061645) do
     t.string   "title"
     t.string   "label"
     t.datetime "last_translated_at", default: '2014-08-07 08:45:03'
+    t.integer  "sencount"
   end
 
   create_table "sentences", force: true do |t|

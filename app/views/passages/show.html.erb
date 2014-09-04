@@ -2,6 +2,13 @@
 	        <li><%=link_to "首页", root_path%></li>
 		        <li>翻译</li>
 			        </ul> 
+
+<div class="pull-right">
+参与者:
+<%@users.each do |user|%>
+<%=link_to image_tag(user.icon.thumb), user_path(user.id)%>
+<%end%>
+</div>
 <center>
 <span style="font-size: 16px;"> <%=@passage.title%></span>
 </center>
@@ -9,21 +16,23 @@
 	由<%=link_to @passage.user.username, user_path(@passage.user.id)%>
 	于<%= timeago_tag @passage.created_at, :nojs => true, :limit => 10.days.ago, :lang=>:zh %>
 	发起
-	<%=link_to "进入讨论", passageComment_path(@passage.id)%>
+	<%=link_to "进入讨论", passageComment_path(@passage.id),'data-no-turbolink' => true%>
 </div>
+<br>
 <div class="box">
 	<p>预览:</p>
 <span style="color: blue;">
-	<%@passage.sentences.each do |line|%>
-	<p><%=line.content%></p>
-	<p class="translate_sentence"><%=line.get_best_translations(1).first.content if line.get_best_translations(1)!=[]%></p>
-	<%end%>
+	<%@passage.sentences.each do |sentence|%>
+<%=sentence.content.html_safe%>
+<p><span style="color: green"><%=sentence.get_best_translations(1).first.content if sentence.translations!=[]%></span>
+</p>  
+<%end%>
 </span>
 </div>
 <%@sentences.each do |sentence|%>
+<%unless strip_tags(sentence.content).strip==""%>
 <div class="box">
-
-<p class="source_sentence"><%=link_to sentence.content, sentence_path(sentence.id)%></p>
+<p class="source_sentence"><%=link_to strip_tags(sentence.content).strip, sentence_path(sentence.id)%></p>
 <%unless sentence.get_translators.include? current_user.id%>
 <div id="div_on_<%=sentence.id%>">
 <p><input class="btn btn-info" type="button" value="我来翻译"
@@ -85,4 +94,5 @@
 </div>
 <%end%>
 </div>
+<%end%>
 <%end%>

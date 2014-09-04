@@ -1,5 +1,5 @@
 <div class="box">
-<p class="source_sentence"><%=@sentence.content%></p>
+<p class="source_sentence"><%=strip_tags @sentence.content%></p>
 <%@translations.each do |translation|%>
 	<div class="alert alert-success">
 		<%=translation.content%>
